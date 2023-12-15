@@ -1,0 +1,9 @@
+[book]
+authors = ["longfangsong"]
+language = "en"
+multilingual = false
+src = "src"
+title = "给一般人类看的（基于类型论的）数学基础书"
+
+[output.html]
+mathjax-support = true
