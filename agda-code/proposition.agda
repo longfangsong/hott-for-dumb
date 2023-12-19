@@ -1,6 +1,6 @@
 open import Agda.Primitive
 open import Relation.Binary.PropositionalEquality using (_≡_)
-open import Data.Product
+open import Data.Product using (Σ; _,_; proj₁; proj₂)
 open import Data.Sum using (_⊎_)
 
 module proposition where
@@ -23,3 +23,7 @@ module proposition where
 
     _∨_ : {l1 l2 : Level} → Set l1 → Set l2 → Set (l1 ⊔ l2)
     A ∨ B = || A ⊎ B ||
+
+    ∃ : {l1 l2 : Level} (A : Set l1) → (B : A → Set l2) → Set (l1 ⊔ l2)
+    ∃ A B = || Σ A B ||
+    
