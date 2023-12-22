@@ -1,3 +1,5 @@
+{-# OPTIONS --cubical --cubical-compatible #-}
+
 open import Agda.Primitive
 open import Agda.Builtin.Sigma using (Σ)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
@@ -22,11 +24,11 @@ module equivalence where
     has-inverse : {l1 l2 : Level} {A : Set l1} {B : Set l2} (f : A → B) → Set (l1 ⊔ l2)
     has-inverse {_} {_} {A} {B} f = Σ (B → A) (λ g → ((f ∘ g) ~ id) × ((g ∘ f) ~ id))
 
-    has-inverse-to-is-equiv : {l1 l2 : Level} {A : Set l1} {B : Set l2} {f : A → B} → has-inverse f → is-equiv f
-    has-inverse-to-is-equiv (inv , (r-homo , l-homo)) = (inv , r-homo) , (inv , l-homo)
+    has-inverse→is-equiv : {l1 l2 : Level} {A : Set l1} {B : Set l2} {f : A → B} → has-inverse f → is-equiv f
+    has-inverse→is-equiv (inv , (r-homo , l-homo)) = (inv , r-homo) , (inv , l-homo)
 
-    is-equiv-to-has-inverse : {l1 l2 : Level} {A : Set l1} {B : Set l2} {f : A → B} → is-equiv f → has-inverse f
-    is-equiv-to-has-inverse {f = f} ((r-inv , r-homo), (l-inv , l-homo)) = 
+    is-equiv→has-inverse : {l1 l2 : Level} {A : Set l1} {B : Set l2} {f : A → B} → is-equiv f → has-inverse f
+    is-equiv→has-inverse {f = f} ((r-inv , r-homo), (l-inv , l-homo)) = 
         r-inv , (r-homo , 
             sym-htpy (sym-htpy 
                 l-homo · (
@@ -40,13 +42,13 @@ module equivalence where
     
     trans-≃ : {i : Level} {A B C : Set i} → A ≃ B → B ≃ C → A ≃ C
     trans-≃ A≃B B≃C = 
-        B→C ∘ A→B , has-inverse-to-is-equiv (B→A ∘ C→B , 
+        B→C ∘ A→B , has-inverse→is-equiv (B→A ∘ C→B , 
             f-chain-H B→C (λ x → A→B∘B→A~id (C→B x)) · B→C∘C→B~id , 
             f-chain-H B→A (λ x → C→B∘B→C~id (A→B x)) · B→A∘A→B~id
         ) where 
             A→B = proj₁ A≃B
             is-equiv-A→B = proj₂ A≃B
-            has-inverse-A→B = is-equiv-to-has-inverse is-equiv-A→B
+            has-inverse-A→B = is-equiv→has-inverse is-equiv-A→B
             B→A = proj₁ has-inverse-A→B
             A→B∘B→A~id : (A→B ∘ B→A) ~ id
             A→B∘B→A~id = proj₁ (proj₂ has-inverse-A→B)
@@ -54,7 +56,7 @@ module equivalence where
             B→A∘A→B~id = proj₂ (proj₂ (has-inverse-A→B))
             B→C = proj₁ B≃C
             is-equiv-B→C = proj₂ B≃C
-            has-inverse-B→C = is-equiv-to-has-inverse is-equiv-B→C
+            has-inverse-B→C = is-equiv→has-inverse is-equiv-B→C
             C→B = proj₁ has-inverse-B→C
             B→C∘C→B~id = proj₁ (proj₂ has-inverse-B→C)
             C→B∘B→C~id = proj₂ (proj₂ has-inverse-B→C)
@@ -64,9 +66,11 @@ module equivalence where
         (f , is-linv-evidence) , 
         (f , is-rinv-evidence)
         where
-            has-inverse-f = is-equiv-to-has-inverse is-equiv-f
+            has-inverse-f = is-equiv→has-inverse is-equiv-f
             inv = proj₁ has-inverse-f
             has-inverse-ev = proj₂ has-inverse-f
             is-rinv-evidence = proj₁ has-inverse-ev
             is-linv-evidence = proj₂ has-inverse-ev
 
+    postulate
+        ua : {l : Level} {A : Set l} {B : Set l} → A ≃ B → A ≡ B

@@ -1,3 +1,5 @@
+{-# OPTIONS --cubical --cubical-compatible #-}
+
 open import Agda.Primitive
 open import Data.Nat
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; sym; module ≡-Reasoning)

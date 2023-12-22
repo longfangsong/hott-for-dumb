@@ -20,8 +20,11 @@
 
 - [命题以下和集合以上：n-类型](./n-type/n-type.md)
 - [Loop space](./loop-space/loop-space.md)
-- [例子：Circle](./circle/circle.md)
 
 # 范畴论
 
-- [范畴](./category/category.md)
+- [（前）范畴与同构](./category/category.md)
+
+# Circle
+
+- [例子：Circle](./circle/circle.md)

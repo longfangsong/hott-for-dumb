@@ -1,3 +1,5 @@
+{-# OPTIONS --cubical --cubical-compatible #-}
+
 open import Agda.Primitive
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans; cong)
 open import Function.Base
@@ -25,3 +27,7 @@ module homotopy where
     
     H-chain-f : {l1 l2 l3 : Level} {A : Set l1} {B : Set l2} {C : Set l3} {g h : B → C} (H : g ~ h) (f : A → B) → ((h ∘ f) ~ (g ∘ f))
     H-chain-f H f = λ x → sym (H (f x))
+
+    postulate
+        funext : {l1 l2 : Level} {A : Set l1} {B : A → Set l2} {f g : (x : A) → B x} → f ~ g → f ≡ g
+        

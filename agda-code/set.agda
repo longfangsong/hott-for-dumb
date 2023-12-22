@@ -1,3 +1,5 @@
+{-# OPTIONS --cubical --cubical-compatible #-}
+
 open import Agda.Primitive
 open import Relation.Binary.PropositionalEquality using (_≡_)
 open import Data.Product

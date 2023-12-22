@@ -66,9 +66,9 @@ $$
 
 $$
 \begin{align}
-\text{is-\_-type}(-2) &:= \text{is-contr} \\\\
-\text{is-\_-type}(n) &:= \Pi_{(x, y : A)} \text{is-\_-type}(n-1)(x = y)\ \text{for}\ n>-2 \\\\
-\text{\_Type}(n) &:= Σ\_{(A : Type)} \text{is-\_-type}(A)
+\text{is-(-2)-type} &:= \text{is-contr} \\\\
+\text{is-(n+1)-type} &:= \Pi_{(x, y : A)} \text{is-n-type}(x = y) \\\\
+\text{nType} &:= Σ\_{(A : Type)} \text{is-n-type}(A)
 \end{align}
 $$
 
@@ -86,4 +86,4 @@ $$
 
 类似 Prop 和 Set，我们可以将任意类型转换成 n-类型，这个过程被称为 **n-truncation**，我们用 \\(|| A ||_n\\) 表示 \\(A\\) 类型转换成 n-类型后的类型。
 
-[^1]: 由于 1-type 上的 identity type 是 set，我们又已经知道 identity type 是一个广群，所以 1-type 以及更高等级的类型中的 identity type 是非平凡的广群，因此 1-type 也被称为广群。
+[^1]: 由于 1-type 上的 identity type 是 set，我们又已经知道任何类型上的 identity type 是一个广群，所以 1-type 以及更高等级的类型中的 identity type 是非平凡的广群，因此 1-type 也被称为广群。
