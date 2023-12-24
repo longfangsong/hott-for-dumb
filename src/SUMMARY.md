@@ -16,7 +16,7 @@
 - [集合](./set/set.md)
 - [群](./group/group.md)
 
-# 拓扑学与同伦论
+# 拓扑学与同伦论 I
 
 - [命题以下和集合以上：n-类型](./n-type/n-type.md)
 - [Loop space](./loop-space/loop-space.md)
@@ -24,6 +24,8 @@
 # 范畴论
 
 - [（前）范畴与同构](./category/category.md)
+- [米田（Yoneda）引理和泛性质](./universal-property/universal-property.md)
+- [覆盖和覆盖空间](./cover/cover.md)
 
 # Circle
 
