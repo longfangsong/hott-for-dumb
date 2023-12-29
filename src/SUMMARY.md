@@ -25,8 +25,13 @@
 
 - [（前）范畴与同构](./category/category.md)
 - [米田（Yoneda）引理和泛性质](./universal-property/universal-property.md)
-- [覆盖和覆盖空间](./cover/cover.md)
 
 # Circle
 
 - [例子：Circle](./circle/circle.md)
+
+# 附录
+
+## 证明技巧
+
+- [encode-decode 方法](./encode-decode/encode-decode.md)

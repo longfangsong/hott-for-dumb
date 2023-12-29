@@ -9,13 +9,13 @@ isSet(A) :=& \Pi\_{(x, y : A)} isProp(x = y) \\\\
 \end{align}
 $$
 
-其中的 $p = q$ 就是一个高阶的 Identity type。
+其中的 \\(p = q\\) 就是一个高阶的 Identity type。
 
 我们定义最基本的元素之间的 Identity type 为 1 阶 path （写作 1-path），即 \\(x =\_A y\\)，那么 \\(p =_{x = y} q\\) 就是 2 阶 path，以此类推，我们可以定义 n 阶 path。
 
 在高阶 path 中，我们最感兴趣的是 首尾相连的 path，即 \\(x =\_A x\\)，我们称之为 loop。
 
-## Loop space
+## Loop space 的定义
 
 给定一个类型 \\(A\\) 和其中的一个 item \\(a\\)，我们可以定义出 \\(A\\) 的 loop space 类型，定义为：
 
