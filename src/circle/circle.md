@@ -82,12 +82,6 @@ loop≢refl : ¬ (loop ≡ refl)
 loop≢refl loop≡refl = true≢false (cong (lift-to-cover true) (sym loop≡refl))
 ```
 
-[^1]: 平凡的 path 是 refl。
-
-[^2]: 这其实是可以证明的，可以通过建立 Bool 和 {⊤,⊥} 类型建立关系来证明，或者可以用 encode-decode 方法，通过证明 Bool 等价于 ⊤ + ⊤ 来证明。
-
-[^3]: 应为：局部同胚，但这个术语 makes no sense to our target reader。
-
 ## Circle 的 loop space
 
 回忆 loop space 的定义：
@@ -121,3 +115,9 @@ $$
 我们可以看出，这些 base 到 base 的 path 似乎和整数集合 \\(\mathbb{Z}\\) 有点关系，实际上，我们可以证明这两个集合是等价的，即 \\(Ω(S^1) = Z\\)。
 
 证明方式和证明 \\(loop ≠ refl\\) 的方式类似，我们先建立 \\(S^1\\) 和 \\(Z\\) 之间的关系，然后证明 \\(Z\\) 是 \\(S^1\\) 的 loop space，其中用到的 isomorphism 是 succ。
+
+[^1]: 平凡的 path 是 refl。
+
+[^2]: 这其实是可以证明的，可以通过建立 Bool 和 {⊤,⊥} 类型建立关系来证明，或者可以用 encode-decode 方法，通过证明 Bool 等价于 ⊤ + ⊤ 来证明。
+
+[^3]: 应为：局部同胚，但这个术语 makes no sense to our target reader。

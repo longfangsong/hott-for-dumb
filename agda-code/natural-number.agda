@@ -1,9 +1,18 @@
 {-# OPTIONS --cubical --cubical-compatible #-}
 
+open import Function.Base
 open import Agda.Primitive
+open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Nat
+open import Data.Product
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; sym; module ≡-Reasoning)
 open import identity-type using (J; _⋅_)
+open import Data.Unit using (⊤; tt)
+open import Data.Empty using (⊥)
+
+open import homotopy
+open import n-type
+open import equivalence
 
 module natural-number where
     0-is-right-unit : ∀ n → 0 + n ≡ n
@@ -28,3 +37,36 @@ module natural-number where
             n + suc m
         ∎)
         where open ≡-Reasoning
+
+    Eq : ℕ → ℕ → Set
+    Eq zero zero = ⊤
+    Eq zero (suc n) = ⊥
+    Eq (suc m) zero = ⊥
+    Eq (suc m) (suc n) = Eq m n
+
+    refl-Eq : ∀ n → Eq n n
+    refl-Eq zero = tt
+    refl-Eq (suc n) = refl-Eq n
+
+    suc-Eq : {m : ℕ} {n : ℕ} → Eq m n → Eq (suc m) (suc n)
+    suc-Eq {zero} {zero} = λ _ → tt
+    suc-Eq {zero} {suc n} = λ z → z
+    suc-Eq {suc m} {zero} = λ z → z
+    suc-Eq {suc m} {suc n} = λ z → z
+
+    suc-Eq-on-pointed : {m : ℕ} → Σ ℕ (Eq m) → Σ ℕ (Eq (suc m))
+    suc-Eq-on-pointed (n , e) = (suc n , e)
+    
+    contract-Σ-ℕ-Eq : ∀ (m : ℕ) (x : Σ ℕ (Eq m)) → x ≡ (m , refl-Eq m)
+    contract-Σ-ℕ-Eq (zero) (zero , _) = refl
+    contract-Σ-ℕ-Eq (suc m) (suc n , e) = cong suc-Eq-on-pointed (contract-Σ-ℕ-Eq m (n , e))
+
+    is-contr-Σ-ℕ-Eq : (m : ℕ) → is-contr (Σ ℕ (Eq m))
+    is-contr-Σ-ℕ-Eq m = (m , refl-Eq m) , contract-Σ-ℕ-Eq m
+
+    ≡→Eq : {x y : ℕ} → x ≡ y → Eq x y
+    ≡→Eq {x} {.x} refl = refl-Eq x
+    
+    Eq→≡ : {x y : ℕ} → Eq x y → x ≡ y
+    Eq→≡ {zero} {zero} eqnxy = refl
+    Eq→≡ {suc x} {suc y} eqnxy = cong suc (Eq→≡ {x} {y} eqnxy)

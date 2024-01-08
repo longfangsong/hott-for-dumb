@@ -1,9 +1,17 @@
 {-# OPTIONS --cubical --cubical-compatible #-}
 
 open import Agda.Primitive
-open import Relation.Binary.PropositionalEquality using (_≡_)
-open import Data.Product using (Σ; _,_; proj₁; proj₂)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; cong₂; cong-app; trans; sym)
+open import Data.Product using (Σ; _,_; proj₁; proj₂; _×_)
 open import Data.Sum using (_⊎_)
+open import Data.Empty using (⊥)
+open import Function.Base
+
+open import n-type using (fib)
+open import equivalence
+open import homotopy
+open import n-type using (is-contr)
+open import identity-type using (J)
 
 module proposition where
     is-prop : {l1 : Level} → (A : Set l1) → Set l1
@@ -28,4 +36,9 @@ module proposition where
 
     ∃ : {l1 l2 : Level} (A : Set l1) → (B : A → Set l2) → Set (l1 ⊔ l2)
     ∃ A B = || Σ A B ||
+
+    is-surj : {l1 l2 : Level} {A : Set l1} {B : Set l2} → (f : A → B) → Set (l1 ⊔ l2)
+    is-surj {B = B} f = (b : B) → || fib f b ||
     
+    is-emb : {l1 l2 : Level} {A : Set l1} {B : Set l2} (f : A → B) → Set (l1 ⊔ l2)
+    is-emb {l1} {l2} {A} f = (x y : A) → is-equiv (cong f {x} {y})

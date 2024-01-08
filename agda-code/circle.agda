@@ -75,7 +75,7 @@ module circle where
     loop -[1+ zero ] times = sym loop
     loop -[1+ (suc-ℕ n) ] times = sym loop ∙ loop -[1+ n ] times
 
-
+    -- code
     ℤ-cover : S¹ → Set
     ℤ-cover base = ℤ
     ℤ-cover (loop i) = sucPath i
@@ -86,8 +86,10 @@ module circle where
     lift-to-cover-ℤ : ℤ → (x : S¹) → base ≡ x → ℤ-cover x
     lift-to-cover-ℤ n x p = subst ℤ-cover p n
 
+    -- encode
     lift-to-cover-0ℤ = lift-to-cover-ℤ (+ zero)
 
+    -- decode
     inv-lift-to-cover-0ℤ : (x : S¹) → ℤ-cover x → base ≡ x
     inv-lift-to-cover-0ℤ base = loop_times
     inv-lift-to-cover-0ℤ (loop i) = λ x i₁ → {!   !}

@@ -36,6 +36,21 @@ P \simeq Q &\leftrightarrow (P \leftrightarrow Q)
 \end{align}
 $$
 
+### a map is an embedding if and only if its fibers are propositions
+
+## 一些常见的命题
+
+- \\(⊤\\)
+- \\(⊥\\)
+- If \\(A\\) is a prop, \\(A ≃ B\\), then $B$ is a prop. And vice versa, all props are equivalent to each other.
+- Observational equal on $ℕ$ and Bool, ie. \\(\text{Eq-}ℕ(n, m)\\). Since it is equivalent to identity type on these types, identity type on these types is also a prop.
+- A product of props is a prop，推到 \\(\Pi\\) 类型上也成立.
+- Given a prop A and $\text{is-subtype}(B)$ of A, then $\text{is-prop}(Σ_{(x:A)} B(x))$
+<!-- - \\(\text{is-equiv}(A)\\) 是 prop。 -->
+- \\(\text{is-contr}(A)\\), \\(\text{is-prop}(A)\\), ..., \\(\text{is-k-type}(A)\\) 都是 prop。
+- Given a prop B, \\(A → B\\) is a prop, a special case is, the negation of a type (\\(\neg A\\)) is a prop.
+
+
 ## 一般类型和命题的关系
 
 对所有类型，我们都可以“抹去”它们的其他细节，得到一个命题，我们用 \\(|| A ||\\) 表示 \\(A\\) 类型抹去信息后得到的命题。

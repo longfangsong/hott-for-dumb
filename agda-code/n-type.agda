@@ -42,3 +42,12 @@ module n-type where
 
     postulate
         is-k-Type-after-squash : {l : Level} → (k : 𝕋) → (A : Set l) → is- k -type (|| A || k)
+
+    fib : {l1 l2 : Level} → {A : Set l1} → {B : Set l2} → (f : A → B) → B → Set (l1 ⊔ l2)
+    fib {A = A} f b = Σ A λ a → f a ≡ b
+
+    im : {l1 l2 : Level} → {A : Set l1} → {X : Set l2} → (f : A → X) → Set (lsuc l1 ⊔ lsuc l2)
+    im {X = X} f = Σ X λ x → || fib f x || neg-one
+
+    i : {l1 l2 : Level} → {A : Set l1} → {X : Set l2} → (f : A → X) → im f → X
+    i f = proj₁

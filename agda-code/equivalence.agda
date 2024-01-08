@@ -2,11 +2,12 @@
 
 open import Agda.Primitive
 open import Agda.Builtin.Sigma using (Σ)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; cong; trans; subst; resp)
 open import Function.Base
 open import Data.Product
 
 open import homotopy
+open import n-type
 
 module equivalence where
     sec : {l1 l2 : Level} {A : Set l1} {B : Set l2} (f : A → B) → Set (l1 ⊔ l2)
@@ -74,3 +75,31 @@ module equivalence where
 
     postulate
         ua : {l : Level} {A : Set l} {B : Set l} → A ≃ B → A ≡ B
+
+    fib-contractable→is-equiv : {l1 l2 : Level} {A : Set l1} {B : Set l2} → {f : A → B} → ((b : B) → is-contr (fib f b)) → is-equiv f
+    fib-contractable→is-equiv {B = B} {f = f} fib-at-b-contr = 
+        has-inverse→is-equiv (f-inv , 
+            (λ b → evidence-is-fib b) , 
+            (λ a → sym (cong proj₁ (fib-at-b-contraction (f a) (a , refl))))
+        )
+        where
+            fib-at-b-contr-center = λ (b : B) → proj₁ (fib-at-b-contr b)
+            fib-at-b-contraction = λ (b : B) → proj₂ (fib-at-b-contr b)
+            f-inv = λ (b : B) → proj₁ (fib-at-b-contr-center b)
+            evidence-is-fib = λ (b : B) → proj₂ (fib-at-b-contr-center b)
+    
+    Eq-fib : {l1 l2 : Level} {A : Set l1} {B : Set l2} → (f : A → B) 
+        → {y : B} → ((x , p) : fib f y) → ((x' , p') : fib f y)
+        → Set (l1 ⊔ l2)
+    Eq-fib f (x , p) (x' , p') = Σ (x ≡ x') (λ α → p ≡ trans (cong f α) p')
+
+    postulate
+        Eq-fib→≡-fib : {l1 l2 : Level} {A : Set l1} {B : Set l2} → (f : A → B) 
+            → {y : B} → ((x , p) : fib f y) → ((x' , p') : fib f y)
+            → Eq-fib f (x , p) (x' , p') → (x , p) ≡ (x' , p')
+    
+
+    uniqueness-refl : {i : Level} {A : Set i} 
+        (a : A) (x : A) (p : a ≡ x) →
+        ((a , refl {x = a}) ≡ (x , p))
+    uniqueness-refl a a refl = refl

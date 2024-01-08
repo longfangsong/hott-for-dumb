@@ -250,7 +250,7 @@ Propositional Equal 是我们最常用的等于，我们将在后续章节中继
 
 当这个二元关系返回 \\(\top\\) 的时候，我们就说这两个东西是 Observational Equal 的。
 
-两个东西 Observational Equal 常常和两个 Propositional Equal 逻辑等价（即可以互相推出）的，如果能证明这一点，我们就可以将 Propositional Equal 上的各种性质应用到 Observational Equal 上，反方向上，由于 Observational Equal 的良好计算性质，我们也可以利用 Observational Equal 证明各种性质并应用到 Propositional Equal 上。
+两个东西 Observational Equal 常常和两个 Propositional Equal 逻辑等价（即可以互相推出）的，如果能证明这一点，我们就可以将 Propositional Equal 上的各种性质应用到 Observational Equal 上，反方向上，由于 Observational Equal 的良好计算性质，我们也可以利用 Observational Equal 证明各种性质并应用到 Propositional Equal 上，我们将在之后的章节中研究如何建立这种联系。
 
 我们将在下一章中研究自然数上的 Observational Equal。
 
